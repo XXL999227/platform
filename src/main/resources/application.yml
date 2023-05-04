@@ -6,3 +6,7 @@ spring:
     url: jdbc:mysql://localhost:3306/platform?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
   jpa:
     show-sql: true
+#    指定flyway的基线版本
+  flyway:
+    baseline-on-migrate: true
+    baseline-version: 20230504001
