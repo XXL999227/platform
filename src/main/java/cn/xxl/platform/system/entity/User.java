@@ -22,7 +22,7 @@ public class User extends BaseEntity {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)// 自增长策略,让持久层的提供者，也就是数据库，自己去生成主键
-    private Integer id;
+    private Long id;
 
     /**
      * 用户名
@@ -72,7 +72,7 @@ public class User extends BaseEntity {
      * 年龄
      */
     @Column
-    private int age;
+    private Integer age;
 
     /**
      * 状态 1-正常 2-禁用

@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -47,7 +46,7 @@ class UserDaoTest {
      */
     @Test
     void getById() {
-        Optional<User> user = userDao.findById(2);
+        Optional<User> user = userDao.findById(7L);
         boolean present = user.isPresent();
         System.out.println(present);
         user.ifPresent(System.out::println);
@@ -60,9 +59,9 @@ class UserDaoTest {
      */
     @Test
     void updateById(){
-        Optional<User> user = userDao.findById(2);
+        Optional<User> user = userDao.findById(2L);
         user.ifPresent(user1 ->{
-            user1.setUsername("xxl2");
+            user1.setUsername("xxl222");
             userDao.save(user1);
         });
         user.ifPresent(System.out::println);
@@ -74,9 +73,9 @@ class UserDaoTest {
     @Test
     // @Transactional
     void deleteById(){
-        userDao.deleteById(5);
-        Optional<User> user = userDao.findById(5);
-        Assertions.assertTrue(!user.isPresent());
+        userDao.deleteById(5L);
+        Optional<User> user = userDao.findById(5L);
+        Assertions.assertFalse(user.isPresent());
     }
 
     /**
@@ -84,7 +83,7 @@ class UserDaoTest {
      */
     @Test
     void logicDeleteById(){
-        userDao.logicDeleteById(6);
-        Assertions.assertFalse(userDao.findById(6).isPresent());
+        userDao.logicDeleteById(6L);
+        Assertions.assertFalse(userDao.findById(6L).isPresent());
     }
 }

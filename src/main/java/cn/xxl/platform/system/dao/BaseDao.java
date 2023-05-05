@@ -15,12 +15,12 @@ import java.util.Optional;
  * @since 2023/4/23
  */
 @NoRepositoryBean
-public interface BaseDao<T extends BaseEntity> extends JpaRepository<T, Integer> {
+public interface BaseDao<T extends BaseEntity> extends JpaRepository<T, Long> {
 
     @Override
     @Query(value = "select t from #{#entityName} t where t.id = ?1 and t.isDeleted = 0")
     @Transactional(readOnly = true)
-    Optional<T> findById(Integer integer);
+    Optional<T> findById(Long id);
 
     @Override
     @Query(value = "select t from #{#entityName} t where t.isDeleted = 0")
@@ -35,5 +35,5 @@ public interface BaseDao<T extends BaseEntity> extends JpaRepository<T, Integer>
     @Query(value = "update #{#entityName} t set t.isDeleted = 1 where t.id = ?1")
     @Modifying
     @Transactional(rollbackFor = Exception.class)
-    void logicDeleteById(Integer id);
+    void logicDeleteById(Long id);
 }
