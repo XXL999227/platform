@@ -9,4 +9,12 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserDao extends BaseDao<User> {
+
+    /**
+     * 根据用户名查找用户
+     *
+     * @param username 用户名
+     * @return {@link User}
+     */
+    User findByUsername(String username);
 }

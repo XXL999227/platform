@@ -7,4 +7,5 @@ import cn.xxl.platform.system.entity.User;
  * @since 2023/5/5
  */
 public interface UserService extends BaseService<User> {
+    void login(User user);
 }

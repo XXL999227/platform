@@ -43,4 +43,16 @@ public class UserController {
         userService.deleteById(id);
         return Result.ok();
     }
+
+    /**
+     * 登录
+     *
+     * @param user 用户
+     * @return {@link Result}<{@link Void}>
+     */
+    @PostMapping("/login")
+    Result<Void> login(@RequestBody User user){
+        userService.login(user);
+        return Result.ok();
+    }
 }

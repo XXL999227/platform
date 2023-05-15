@@ -37,6 +37,11 @@ public class User extends BaseEntity {
     private String password;
 
     /**
+     * 盐
+     */
+    private String salt;
+
+    /**
      * 性别 0-男 1-女
      */
     private Integer gender;
