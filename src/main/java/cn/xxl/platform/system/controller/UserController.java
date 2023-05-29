@@ -3,6 +3,7 @@ package cn.xxl.platform.system.controller;
 import cn.xxl.platform.system.entity.Result;
 import cn.xxl.platform.system.entity.User;
 import cn.xxl.platform.system.service.UserService;
+import cn.xxl.platform.system.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,8 +52,9 @@ public class UserController {
      * @return {@link Result}<{@link Void}>
      */
     @PostMapping("/login")
-    Result<Void> login(@RequestBody User user){
+    Result<String> login(@RequestBody User user){
         userService.login(user);
-        return Result.ok();
+        String token = JwtUtil.generateToken(user.getUsername(), user.getId());
+        return Result.ok(token);
     }
 }
