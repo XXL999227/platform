@@ -77,6 +77,13 @@
             <artifactId>java-jwt</artifactId>
             <version>4.3.0</version>
         </dependency>
+
+        <!-- 引入freeMarker模板引擎 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

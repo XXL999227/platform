@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(CommonException.class)
-    public Result<Void> handleGseinException(CommonException e) {
+    public Result<Void> handleCommonException(CommonException e) {
         log.error(e.getMessage(), e);
         return Result.error(e.getMessage());
     }
