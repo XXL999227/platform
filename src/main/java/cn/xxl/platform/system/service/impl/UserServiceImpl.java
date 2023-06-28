@@ -2,9 +2,11 @@ package cn.xxl.platform.system.service.impl;
 
 import cn.xxl.platform.system.dao.UserDao;
 import cn.xxl.platform.system.entity.User;
+import cn.xxl.platform.system.exception.CommonException;
 import cn.xxl.platform.system.service.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +51,10 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, User> implements U
 
         // 改用spring-security
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
-        authenticationManager.authenticate(token);
+        try {
+            authenticationManager.authenticate(token);
+        } catch (AuthenticationException e) {
+            throw new CommonException("用户名或密码错误", e);
+        }
     }
 }

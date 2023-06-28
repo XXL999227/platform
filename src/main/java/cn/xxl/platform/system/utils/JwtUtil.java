@@ -6,6 +6,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 /**
  * @author xiaoxiaolong
@@ -21,7 +22,7 @@ public final class JwtUtil {
         return JWT.create()
                 .withClaim("username", username)
                 .withClaim("userId", userId)
-                .withExpiresAt(Instant.now().plus(1, ChronoUnit.DAYS))
+                .withExpiresAt(Instant.now().plus(1, ChronoUnit.MINUTES))
                 .sign(Algorithm.HMAC256(SECRET));
     }
 
@@ -41,5 +42,9 @@ public final class JwtUtil {
         } catch (JWTVerificationException | IllegalArgumentException e) {
             return false;
         }
+    }
+
+    public static boolean isExpired(String token) {
+        return JWT.decode(token).getExpiresAt().before(new Date());
     }
 }

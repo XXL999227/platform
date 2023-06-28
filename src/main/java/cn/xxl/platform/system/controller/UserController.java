@@ -49,7 +49,7 @@ public class UserController {
      * 登录
      *
      * @param user 用户
-     * @return {@link Result}<{@link Void}>
+     * @return {@link Result}<{@link String}>
      */
     @PostMapping("/login")
     Result<String> login(@RequestBody User user){
