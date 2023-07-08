@@ -36,7 +36,7 @@ class UserServiceTest {
     void save() {
         User user = new User();
         // user.setId(99);
-        user.setUsername("张三");
+        user.setUsername("admin");
         user.setPassword("123456");
         user.setGender(0);
         user.setIdCard("123456789012345678");
@@ -44,6 +44,7 @@ class UserServiceTest {
         user.setPhone("12345678901");
         user.setBirthday(LocalDateTime.now());
         user.setStatus(0);
+        user.setIsDeleted(0);
         user.setLastLogin(LocalDateTime.now());
         userService.save(user);
     }

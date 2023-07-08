@@ -2,12 +2,14 @@ package cn.xxl.platform.system.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.Proxy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * 用户表
@@ -15,10 +17,11 @@ import java.util.Collection;
  * @author xiaoxiaolong
  * @since 2023/04/13
  */
-@EqualsAndHashCode(callSuper = true)//是否调用父类的equals和hashCode方法
+@EqualsAndHashCode(callSuper = true)// 是否调用父类的equals和hashCode方法
 @Entity
 @Table(name = "system_user")
 @Data
+@Proxy(lazy=false)
 public class User extends BaseEntity implements UserDetails {
     /**
      * 主键
@@ -94,6 +97,13 @@ public class User extends BaseEntity implements UserDetails {
     @Column
     private LocalDateTime lastLogin;
 
+    @ManyToMany
+    @JoinTable(name = "system_user_role",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    private List<Role> roles;
+
     @Override
     public String toString() {
         return "User{" +
@@ -110,6 +120,9 @@ public class User extends BaseEntity implements UserDetails {
                 ", lastLogin=" + lastLogin +
                 "} " + super.toString();
     }
+
+    @Transient
+    private Collection<? extends GrantedAuthority> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

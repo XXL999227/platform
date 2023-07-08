@@ -22,7 +22,8 @@ public final class JwtUtil {
         return JWT.create()
                 .withClaim("username", username)
                 .withClaim("userId", userId)
-                .withExpiresAt(Instant.now().plus(1, ChronoUnit.MINUTES))
+                // token过期时间
+                .withExpiresAt(Instant.now().plus(1, ChronoUnit.HOURS))
                 .sign(Algorithm.HMAC256(SECRET));
     }
 
